@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using apiTeste.Context;
 using apiTeste.Model;
 using System.Collections;
+using apiTeste.Filter;
 
 namespace apiTeste.Controllers
 {
@@ -23,6 +24,7 @@ namespace apiTeste.Controllers
         }
 
         [HttpGet]
+        [ServiceFilter(typeof(LoggingFilter))]
         public async Task<ActionResult<IEnumerable<Categoria>>> Get()
         {
             try
@@ -43,6 +45,7 @@ namespace apiTeste.Controllers
         }
 
         [HttpGet("Produtos")]
+        [ServiceFilter(typeof(LoggingFilter))]
         public async Task<ActionResult<IEnumerable<Categoria>>> GetCategoriaProduto()
         {
             try
@@ -59,6 +62,7 @@ namespace apiTeste.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterCategoria")]
+        [ServiceFilter(typeof(LoggingFilter))]
         public async Task<ActionResult<Categoria>> Get(int id)
         {
             try
@@ -79,6 +83,7 @@ namespace apiTeste.Controllers
             
 
         [HttpPost]
+        [ServiceFilter(typeof(LoggingFilter))]
         public async Task<ActionResult> Post(Categoria categoria)
         {
             if (categoria is null)
@@ -94,6 +99,7 @@ namespace apiTeste.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [ServiceFilter(typeof(LoggingFilter))]
         public async Task<ActionResult> Put(int id, Categoria categoria)
         {
             try
@@ -117,6 +123,7 @@ namespace apiTeste.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [ServiceFilter(typeof(LoggingFilter))]
         public async Task<ActionResult> Delete(int id)
         {
             try

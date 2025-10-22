@@ -1,4 +1,6 @@
 using apiTeste.Context;
+using apiTeste.Filter;
+using apiTeste.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -19,6 +21,16 @@ builder.Services.AddDbContext<apiTesteContext>(options =>
     options.UseSqlServer(sqlConnection)
 );
 
+// Necessario para os Services
+builder.Services.AddTransient<IMeuService, Saudaçao>();
+builder.Services.AddTransient<IMeuService2, Saudaçao2>();
+
+// Ler variaveis de ambiente do appsettins.json
+var valor = builder.Configuration["chave"];
+var valor2 = builder.Configuration["chaveComposta:index1"];
+
+// Serviço de filtro das requests
+builder.Services.AddScoped<LoggingFilter>();
 
 var app = builder.Build();
 
